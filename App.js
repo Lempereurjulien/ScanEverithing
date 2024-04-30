@@ -1,13 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useContext} from "react";
 
+import {ResultProvider} from "./Contexts/ResultContext";
+
+import ResultScreen from "./Screens/ResultScreen";
+import ScanScreen from "./Screens/ScanScreen";
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      <ResultProvider>
+      <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown : false}}>
+        <Stack.Screen name="Scann" component={ScanScreen}/>
+        <Stack.Screen name="Result" component={ResultScreen}/>
+      </Stack.Navigator>
+      </NavigationContainer>
+      </ResultProvider>
+  )
 }
 
 const styles = StyleSheet.create({
